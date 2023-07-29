@@ -7,14 +7,19 @@ import TaskList from "./components/TaskList"
 export default function Home() {
   const [tasks, setTasks] = useState([])
 
-  const handleAddTodo = (newTask) => {
+  const handleAddTask = (newTask) => {
     setTasks([...tasks, newTask])
   }
+
+  const handleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter(task => task.id !== taskId)
+    setTasks(updatedTasks)
+  }
   return (
-    <main>
-      <h1>my task management app</h1>
-      <TaskForm onAddTask={handleAddTodo} />
-      <TaskList tasks={tasks} />
+    <main >
+      <h1>a task management app</h1>
+      <TaskForm onAddTask={handleAddTask}/>
+      <TaskList tasks={tasks} onDeleteTask={handleDeleteTask}/>
     </main>
   )
 }
